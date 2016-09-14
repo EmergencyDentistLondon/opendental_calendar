@@ -1,0 +1,46 @@
+<div id="users">
+	<form method="post" name="userform">
+		<p>
+			<label>Username:</label>
+			<input type="text" name="username" />
+		</p>
+		<p>
+			<label>Password:</label>
+			<input type="password" name="password" />
+		</p>
+		<p>
+			<label>Confirm password:</label>
+			<input type="password" name="passwordconfirm" />
+		</p>
+		<p>
+			<label>Role:</label>
+			<select name="role">
+				<option value="guest">guest</option>
+				<option value="admin">admin</option>
+			</select>
+		</p>
+		<p>
+			<a href="javascript:checkForm()">Submit</a>
+		</p>
+	</form>
+</div>
+<script type="text/javascript">
+	function checkForm(){
+		var username = $("input[name='username']").val();
+		var password = $("input[name='password']").val();
+		var passwordConfirm = $("input[name='passwordconfirm']").val();
+		
+		if(username==''){
+			alert('Username is empty!');
+		}
+		else if(password==''){
+			alert('Password is empty!');
+		}
+		else if(password!=passwordConfirm){
+			alert('The two passwords are not the same!');
+		}
+		else{
+			$("form[name='userform']").submit();
+		}
+	}
+</script>

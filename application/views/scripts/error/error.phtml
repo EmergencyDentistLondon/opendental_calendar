@@ -1,0 +1,6 @@
+<p><?= $this->message ?></p>
+<?php if($this->trace): ?>
+	<?php foreach($this->trace as $entry): ?>
+		<p class="stackentry"><?= $entry['file'] ?>:<span class="strong"><?= $entry['line'] ?></span> <?= $entry['class'] ?>::<span class="strong"><?= $entry['function'] ?></span></p>
+	<?php endforeach; ?>
+<?php endif; ?>

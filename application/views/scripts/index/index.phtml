@@ -1,0 +1,70 @@
+<div id="appointments">
+	<p>
+		<form method="post">
+			<label>Year:</label>
+			<select name="year">
+				<?php for($i = date('Y')-5; $i <= date('Y')+5; $i++): ?>
+					<option value="<?= $i ?>"<?= ($i==$this->year?' selected="selected"':'') ?>><?= $i ?></option>
+				<?php endfor; ?>
+			</select>
+			<label>Month:</label>
+			<select name="month">
+				<?php for($i = 1; $i <= 12; $i++): ?>
+					<option value="<?= $i ?>"<?= ($i==$this->month?' selected="selected"':'') ?>><?= $i ?></option>
+				<?php endfor; ?>
+			</select>
+			<label>Day:</label>
+			<select name="day">
+				<?php for($i = 1; $i <= 31; $i++): ?>
+					<option value="<?= $i ?>"<?= ($i==$this->day?' selected="selected"':'') ?>><?= $i ?></option>
+				<?php endfor; ?>
+			</select>
+			<input type="submit" value="OK" />
+		</form>
+	</p>
+	<div class="column-left">
+		<div class="column-top"></div>
+		<?php for($i = $this->minHour; $i <= $this->maxHour; $i++): ?>
+			<div class="hour">
+				<span><?= $i ?></span>
+			</div>
+		<?php endfor; ?>
+	</div>
+	<?php foreach($this->operatories as $operatory): ?>
+		<div class="column">
+			<div class="column-top">
+				<?= $operatory->title ?>
+			</div>
+			<div id="operatory<?= $operatory->id ?>" class="column-content" style="height:<?= ($this->maxHour-$this->minHour+1)*72 ?>px;">
+				<?php for($i = $this->minHour; $i <= $this->maxHour; $i++): ?>
+					<div class="hour" id="<?= $operatory->id ?>hour<?= $i ?>">
+						<?php if(isset($this->appointments[$operatory->id][$i])): ?>
+							<?php $j = 0; ?>
+							<?php foreach($this->appointments[$operatory->id][$i] as $appointment): ?>
+								<div id="appointment<?= $appointment->id ?>" class="appointment" style="top:<?= $appointment->minute/10*12 ?>px; left:<?= $j*5 ?>px;" onclick="toggleTop('appointment<?= $appointment->id ?>', 'operatory<?= $operatory->id ?>')">
+									<p><?= $appointment->lastname ?>, <?= $appointment->firstname ?></p>
+									<p class="moreinfo"><?= $appointment->doctor ?></p>
+									<p class="moreinfo"><?= $appointment->time ?></p>
+									<p class="moreinfo"><?= $appointment->note ?></p>
+								</div>
+								<?php $j++; ?>
+							<?php endforeach; ?>
+						<?php endif; ?>
+					</div>
+				<?php endfor; ?>
+			</div>
+		</div>
+	<?php endforeach; ?>
+</div>
+<div class="clear"></div>
+<script type="text/javascript">
+	function toggleTop(appointmentID, columnID){
+		var wasTop = $("#"+appointmentID).hasClass('mosttop');
+		$("#"+columnID+" div.appointment").removeClass('mosttop');
+		$(".moreinfo").hide();
+		if(!wasTop){
+			$("#"+appointmentID).addClass('mosttop');
+			$("#"+appointmentID+" .moreinfo").show();
+		}
+	}
+</script>

@@ -1,0 +1,75 @@
+<div id="schedule">
+	<form method="post">
+		<p>From:</p>
+		<p>
+			<label>Year:</label>
+			<select name="startyear">
+				<?php for($i = date('Y')-5; $i <= date('Y')+5; $i++): ?>
+					<option value="<?= $i ?>"<?= ($i==$this->startyear?' selected="selected"':'') ?>><?= $i ?></option>
+				<?php endfor; ?>
+			</select>
+			<label>Month:</label>
+			<select name="startmonth">
+				<?php for($i = 1; $i <= 12; $i++): ?>
+					<option value="<?= $i ?>"<?= ($i==$this->startmonth?' selected="selected"':'') ?>><?= $i ?></option>
+				<?php endfor; ?>
+			</select>
+			<label>Day:</label>
+			<select name="startday">
+				<?php for($i = 1; $i <= 31; $i++): ?>
+					<option value="<?= $i ?>"<?= ($i==$this->startday?' selected="selected"':'') ?>><?= $i ?></option>
+				<?php endfor; ?>
+			</select>
+		</p>
+		<p>To:</p>
+		<p>
+			<label>Year:</label>
+			<select name="endyear">
+				<?php for($i = date('Y')-5; $i <= date('Y')+5; $i++): ?>
+					<option value="<?= $i ?>"<?= ($i==$this->endyear?' selected="selected"':'') ?>><?= $i ?></option>
+				<?php endfor; ?>
+			</select>
+			<label>Month:</label>
+			<select name="endmonth">
+				<?php for($i = 1; $i <= 12; $i++): ?>
+					<option value="<?= $i ?>"<?= ($i==$this->endmonth?' selected="selected"':'') ?>><?= $i ?></option>
+				<?php endfor; ?>
+			</select>
+			<label>Day:</label>
+			<select name="endday">
+				<?php for($i = 1; $i <= 31; $i++): ?>
+					<option value="<?= $i ?>"<?= ($i==$this->endday?' selected="selected"':'') ?>><?= $i ?></option>
+				<?php endfor; ?>
+			</select>
+		</p>
+		<p>
+			<input type="submit" value="OK" />
+		</p>
+	</form>
+	<table cellspacing="0" cellpadding="0">
+		<tr class="head">
+			<td>Monday</td>
+			<td>Tuesday</td>
+			<td>Wednesday</td>
+			<td>Thursday</td>
+			<td>Friday</td>
+			<td>Saturday</td>
+			<td>Sunday</td>
+		</tr>
+		<?php foreach($this->calendar->getData() as $week): ?>
+			<tr>
+				<?php foreach($week as $day): ?>
+					<td class="day">
+						<p class="date"><?= $this->monthAbbreviations[$day->month] ?>. <?= $day->day ?></p>
+						<?php foreach($day->schedules as $schedule): ?>
+							<p>
+								<?= ($schedule->doctor?$schedule->doctor:$schedule->employee) ?>
+								<?= substr($schedule->startTime, 0, 5) ?>-<?= substr($schedule->endTime, 0, 5) ?>
+							</p>
+						<?php endforeach; ?>
+					</td>
+				<?php endforeach; ?>
+			</tr>
+		<?php endforeach; ?>
+	</table>
+</div>

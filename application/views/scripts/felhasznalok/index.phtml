@@ -1,0 +1,14 @@
+<div id="users">
+	<p>
+		<a href="<?= Zend_Registry::get('baseURL') ?>/felhasznalok/uj">New user</a>
+	</p>
+	<table>
+		<?php foreach($this->users as $user): ?>
+			<tr>
+				<td><?= $user->username ?></td>
+				<td><?= $user->role ?></td>
+				<td><a href="javascript:confirmAction('Are you sure you want to delete \'<?= $user->username ?>\'?', '<?= Zend_Registry::get('baseURL') ?>/felhasznalok/torol/id/<?= $user->id ?>')">Töröl</a></td>
+			</tr>
+		<?php endforeach; ?>
+	</table>
+</div>
