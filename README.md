@@ -6,4 +6,4 @@ It is written in Zend Framework 1, it is planned to be migrated to Zend Framewor
 
 Please ask any questions, if I can I will help.
 
-Emergency Dental Clinic and Implant Centre, 8F Gilbert Place, WC1A 2JD, London. +44 20 3199 6243
+Emergency Dentist - Dental Clinic and Implant Centre, 8F Gilbert Place, WC1A 2JD, London. +44 20 3199 6243
